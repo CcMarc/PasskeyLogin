@@ -153,8 +153,9 @@ license included at `catalog/lib/WebAuthn/LICENSE`).
 This plugin is provided as-is, on a best-effort basis. There is no
 guaranteed support or response time.
 
-- Questions and general help: the Zen Cart support thread
-  (link TBD) or [GitHub issues](https://github.com/CcMarc/PasskeyLogin/issues).
+- Questions and general help: the
+  [Zen Cart support thread](https://www.zen-cart.com/threads/207288)
+  or [GitHub issues](https://github.com/CcMarc/PasskeyLogin/issues).
 - Security reports: see [SECURITY.md](SECURITY.md) — please report
   privately, never in a public issue.
 
