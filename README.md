@@ -148,6 +148,35 @@ license included at `catalog/lib/WebAuthn/LICENSE`).
 | 2.1.0 – 2.2.1 | Should work — every core API this plugin uses was verified present in the 2.1.0 source (`Customer::login()`, the scripted installer base, the plugin language loaders, the notifier hooks). Not yet tested on a live 2.1.x store; reports welcome |
 | 2.0.x and earlier | Not supported |
 
+### Customer devices and browsers
+
+Passkeys are a browser and operating system feature, so what each
+customer can do depends on their hardware:
+
+- Creating and using a passkey directly on a device requires iOS 16+
+  (iPhone 8 or newer), Android 9+ with Google Play services, Windows
+  10+ with Windows Hello, or macOS 13+ with Safari or Chrome.
+- The QR code cross device flow (signing in on a computer with a
+  passkey stored on a phone) additionally requires Bluetooth ON for
+  both devices; the proximity check is part of the phishing protection
+  and cannot be disabled. Phones that cannot update to iOS 16 /
+  Android 9 (for example the iPhone 7 and earlier) show a connecting
+  screen that never completes; that is a platform limit no website can
+  work around.
+- Login page suggestion (conditional UI): Chrome, Edge, and Safari
+  show the passkey in the email field's autofill suggestions. Firefox
+  does not yet implement conditional UI and cannot access Apple
+  Passwords on macOS, so Firefox users will not see a passkey option
+  on the login page; they continue signing in normally and nothing on
+  the page breaks.
+- The easiest first enrollment is directly on a supported phone: sign
+  in with a password there, open My Account, then Passkeys, and add
+  the passkey with the phone's own biometric. The QR flow is mainly
+  for signing in on a computer afterwards.
+
+Customers on unsupported devices simply keep using their password;
+the login page shows them nothing new.
+
 ## Support
 
 This plugin is provided as-is, on a best-effort basis. There is no

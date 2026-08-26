@@ -6,8 +6,8 @@
  * @author      Marcopolo
  * @copyright   2026
  * @license     GNU General Public License (GPL) - https://www.zen-cart.com/license/2_0.txt
- * @version     1.0.0
- * @updated     08-23-2026
+ * @version     1.0.1
+ * @updated     08-26-2026
  * @github      https://github.com/CcMarc/PasskeyLogin
  */
 // Admin console (Extras menu): status overview, customer passkey lookup
@@ -162,7 +162,16 @@ if (is_file($debugFile)) {
                         <tr><td>Clone warnings, last 30 days</td><td><strong><?php echo $clones30; ?></strong></td></tr>
                         <tr><td>Nudge opt outs</td><td><strong><?php echo $optouts; ?></strong></td></tr>
                     </table>
-                    <p style="margin-top:10px;"><a href="<?php echo zen_href_link(FILENAME_CONFIGURATION, 'action=locate&configuration_key=PKL_ENABLED'); ?>">Open settings</a></p>
+                    <?php
+                    // Link straight to the plugin's configuration group by gID.
+                    // (v1.0.0 used a nonexistent action=locate URL, which fell
+                    // through to the configuration page while core's
+                    // init_templates.php warned about the missing gID on PHP 8.)
+                    $pklSettingsGid = $db->Execute("SELECT configuration_group_id FROM " . TABLE_CONFIGURATION . " WHERE configuration_key = 'PKL_ENABLED' LIMIT 1");
+                    if (!$pklSettingsGid->EOF) {
+                    ?>
+                    <p style="margin-top:10px;"><a href="<?php echo zen_href_link(FILENAME_CONFIGURATION, 'gID=' . (int)$pklSettingsGid->fields['configuration_group_id']); ?>">Open settings</a></p>
+                    <?php } ?>
                 </div>
             </div>
 

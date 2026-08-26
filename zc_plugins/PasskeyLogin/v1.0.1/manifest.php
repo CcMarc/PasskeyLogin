@@ -11,8 +11,8 @@
  * @github      https://github.com/CcMarc/PasskeyLogin
  */
 return [
-    'pluginVersion'     => 'v1.0.0',
-    'pluginHotfixLevel' => 9,
+    'pluginVersion'     => 'v1.0.1',
+    'pluginHotfixLevel' => 0,
     'pluginName'        => 'Passkey Login',
     'pluginDescription' => 'Lets customers sign in with a passkey (Face ID, fingerprint, Windows Hello, or a security key) instead of typing a password. Uses the WebAuthn standard. Passkeys appear in the browser autofill on the login page, so no extra buttons are added for customers who do not use them.',
     'pluginAuthor'      => 'Marcopolo',

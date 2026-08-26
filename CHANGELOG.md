@@ -3,6 +3,24 @@
 File headers (`@version` / `@updated`) record the release that LAST MODIFIED
 each file, not the current release — same convention as Zen Cart core.
 
+## v1.0.1 (08-26-2026)
+
+- FIX: the admin console's Open Settings link used a configuration URL
+  pattern core does not support (`action=locate`), which fell through
+  to the configuration page while core's `init_templates.php` logged a
+  PHP warning about the missing `gID` parameter on PHP 8. The link now
+  looks up the plugin's configuration group and links it directly with
+  `gID`, the way core navigates.
+- DOCS: the README Compatibility section now covers customer devices
+  and browsers: iOS 16+ / Android 9+ requirements, the Bluetooth
+  requirement of the QR cross device sign in flow, older phones (such
+  as the iPhone 7) that cannot complete it, and Firefox's conditional
+  UI limitations.
+- Deploying over v1.0.0: upload the `v1.0.1` directory alongside the
+  old one and use Plugin Manager's Upgrade (or uninstall and
+  reinstall). Passkeys, audit data, and settings behave as documented
+  in the README's Data section.
+
 ## v1.0.0 (08-23-2026)
 
 Initial public release. Developed and production-tested on Zen Cart 2.2.2
