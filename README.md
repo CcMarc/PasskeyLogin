@@ -2,7 +2,7 @@
 
 ![PasskeyLogin](https://socialify.git.ci/CcMarc/PasskeyLogin/image?custom_description=Passwordless+passkey+%28WebAuthn%29+sign+in+for+Zen+Cart&description=1&font=Inter&forks=1&issues=1&language=1&name=1&owner=0&pattern=Signal&pulls=1&stargazers=1&theme=Auto)
 
-[![PHP](https://badgen.net/badge/php/8.0%2B/777BB4)](https://www.php.net/)
+[![Version](https://badgen.net/badge/version/v1.0.1/0e8a16)](https://github.com/CcMarc/PasskeyLogin/blob/main/CHANGELOG.md) [![PHP](https://badgen.net/badge/php/8.0%2B/777BB4)](https://www.php.net/)
 [![Zen Cart](https://badgen.net/badge/zen%20cart/2.1.0%2B/F6851F)](https://www.zen-cart.com/)
 [![License](https://badgen.net/badge/license/GPL-2.0/blue)](https://www.zen-cart.com/license/2_0.txt)
 [![Last Commit](https://badgen.net/github/last-commit/CcMarc/PasskeyLogin/main)](https://github.com/CcMarc/PasskeyLogin/commits/main)
@@ -81,7 +81,7 @@ directories under your catalog root:
 On most hosts this already works and there is nothing to do. If any file
 cannot be written, the install still completes and Plugin Manager shows a
 caution listing the exact files that need copying, with their source
-paths under `zc_plugins/PasskeyLogin/v1.0.0/publish/`.
+paths under `zc_plugins/PasskeyLogin/v1.0.1/publish/`.
 
 If you see that caution, either copy the listed files manually (FTP or
 file manager — safest on shared hosting), or make the three directories
