@@ -20,7 +20,11 @@ $define = [
     // console displays live here so translations can be dropped in as
     // additional language files.
     'PKL_CON_STATUS' => 'Status',
-    'PKL_CON_STATE_PREFIX' => 'Passkey login is',
+    // Full sentence template: %s receives PKL_CON_ENABLED or
+    // PKL_CON_DISABLED. The whole sentence, including markup and final
+    // punctuation, lives here so each language controls word order and
+    // its own full stop.
+    'PKL_CON_STATE_PREFIX' => 'Passkey login is <strong>%s</strong>.',
     'PKL_CON_ENABLED' => 'ENABLED',
     'PKL_CON_DISABLED' => 'DISABLED',
     'PKL_CON_RP_ID' => 'Relying Party ID:',
@@ -39,6 +43,7 @@ $define = [
     'PKL_CON_LOOKUP_PLACEHOLDER' => 'customer email address',
     'PKL_CON_LOOKUP_BUTTON' => 'Look Up',
     'PKL_CON_LOOKUP_NONE' => 'No customer found with that email address.',
+    'PKL_CON_LOOKUP_ID' => '(id %s)',
     'PKL_CON_LOOKUP_NO_KEYS' => 'This customer has no passkeys.',
     'PKL_CON_TH_LABEL' => 'Label',
     'PKL_CON_TH_ADDED' => 'Added',

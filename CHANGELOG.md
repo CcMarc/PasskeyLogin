@@ -11,6 +11,10 @@ each file, not the current release — same convention as Zen Cart core.
   PHP warning about the missing `gID` parameter on PHP 8. The link now
   looks up the plugin's configuration group and links it directly with
   `gID`, the way core navigates.
+- I18N: the console's status sentence and the customer lookup id are
+  now full sprintf templates (markup and punctuation inside the language
+  constant), so languages with different word order or punctuation, such
+  as Japanese, can translate them naturally.
 - I18N: the admin console previously had its English text hardcoded;
   every string the console displays now comes from language constants in
   the admin extra_definitions language file, so translations can be

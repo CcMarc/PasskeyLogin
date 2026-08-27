@@ -177,6 +177,24 @@ customer can do depends on their hardware:
 Customers on unsupported devices simply keep using their password;
 the login page shows them nothing new.
 
+## Translations
+
+All customer facing text lives in the catalog language files and all
+admin console text lives in
+`zc_plugins/PasskeyLogin/v1.0.1/admin/includes/languages/english/extra_definitions/lang.passkey_login_admin.php`.
+The English files are the canonical key list.
+
+To translate the admin console, copy that file to the matching
+directory for your language (for example
+`admin/includes/languages/french/extra_definitions/` or
+`admin/includes/languages/japanese/extra_definitions/`) and translate
+the values; the keys stay as they are. Strings that build sentences are
+sprintf templates with the markup and punctuation inside the value, so
+word order and punctuation are fully yours.
+
+Contributed language files are welcome; open a pull request or attach
+them to the support thread and they will ship with the plugin, credited.
+
 ## Support
 
 This plugin is provided as-is, on a best-effort basis. There is no

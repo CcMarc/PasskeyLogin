@@ -152,7 +152,7 @@ if (is_file($debugFile)) {
             <div class="panel panel-default">
                 <div class="panel-heading"><strong><?php echo PKL_CON_STATUS; ?></strong></div>
                 <div class="panel-body">
-                    <p><?php echo PKL_CON_STATE_PREFIX; ?> <strong><?php echo $pklEnabled ? PKL_CON_ENABLED : PKL_CON_DISABLED; ?></strong>.
+                    <p><?php echo sprintf(PKL_CON_STATE_PREFIX, $pklEnabled ? PKL_CON_ENABLED : PKL_CON_DISABLED); ?>
                        <?php echo PKL_CON_RP_ID; ?> <code><?php echo htmlspecialchars($rpId, ENT_QUOTES); ?></code></p>
                     <table class="table table-condensed" style="margin-bottom:0;">
                         <tr><td><?php echo PKL_CON_ENROLLED; ?></td><td><strong><?php echo $enrolledCustomers; ?></strong></td></tr>
@@ -200,7 +200,7 @@ if (is_file($debugFile)) {
                         <p style="margin-top:10px;"><?php echo PKL_CON_LOOKUP_NONE; ?></p>
                     <?php } elseif ($lookupCustomer !== null) { ?>
                         <p style="margin-top:12px;"><strong><?php echo htmlspecialchars($lookupCustomer['customers_firstname'] . ' ' . $lookupCustomer['customers_lastname'], ENT_QUOTES); ?></strong>
-                        (id <?php echo (int)$lookupCustomer['customers_id']; ?>)</p>
+                        <?php echo sprintf(PKL_CON_LOOKUP_ID, (int)$lookupCustomer['customers_id']); ?></p>
                         <?php if (count($lookupKeys) === 0) { ?>
                             <p><?php echo PKL_CON_LOOKUP_NO_KEYS; ?></p>
                         <?php } else { ?>
