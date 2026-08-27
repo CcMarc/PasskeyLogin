@@ -7,7 +7,7 @@
  * @copyright   2026
  * @license     GNU General Public License (GPL) - https://www.zen-cart.com/license/2_0.txt
  * @version     1.0.1
- * @updated     08-26-2026
+ * @updated     08-27-2026
  * @github      https://github.com/CcMarc/PasskeyLogin
  */
 // Admin console (Extras menu): status overview, customer passkey lookup
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'remove_key') {
     if ($hasCredentials && $passkeyId > 0 && $ownerId > 0) {
         if (PasskeyLoginService::deleteCredential($passkeyId, $ownerId)) {
             if ($hasAudit) PasskeyLoginService::audit('admin_removed', $ownerId);
-            $messageStack->add_session('Passkey removed for customer id ' . $ownerId . '.', 'success');
+            $messageStack->add_session(sprintf(PKL_CON_REMOVE_DONE, (int)$ownerId), 'success');
         }
     }
     zen_redirect(zen_href_link(FILENAME_PASSKEY_LOGIN_CONSOLE, ($lookupEmail !== '' ? 'email=' . urlencode($lookupEmail) : '')));
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'sweep') {
     if ($hasAudit) {
         $db->Execute("DELETE FROM " . TABLE_PASSKEY_AUDIT . " WHERE date_added < DATE_SUB(now(), INTERVAL 90 DAY)");
     }
-    $messageStack->add_session('Maintenance sweep complete for all available Passkey Login tables.', 'success');
+    $messageStack->add_session(PKL_CON_SWEEP_DONE, 'success');
     zen_redirect(zen_href_link(FILENAME_PASSKEY_LOGIN_CONSOLE));
 }
 
@@ -150,17 +150,17 @@ if (is_file($debugFile)) {
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-default">
-                <div class="panel-heading"><strong>Status</strong></div>
+                <div class="panel-heading"><strong><?php echo PKL_CON_STATUS; ?></strong></div>
                 <div class="panel-body">
-                    <p>Passkey login is <strong><?php echo $pklEnabled ? 'ENABLED' : 'DISABLED'; ?></strong>.
-                       Relying Party ID: <code><?php echo htmlspecialchars($rpId, ENT_QUOTES); ?></code></p>
+                    <p><?php echo PKL_CON_STATE_PREFIX; ?> <strong><?php echo $pklEnabled ? PKL_CON_ENABLED : PKL_CON_DISABLED; ?></strong>.
+                       <?php echo PKL_CON_RP_ID; ?> <code><?php echo htmlspecialchars($rpId, ENT_QUOTES); ?></code></p>
                     <table class="table table-condensed" style="margin-bottom:0;">
-                        <tr><td>Customers with a passkey</td><td><strong><?php echo $enrolledCustomers; ?></strong></td></tr>
-                        <tr><td>Total passkeys</td><td><strong><?php echo $totalKeys; ?></strong></td></tr>
-                        <tr><td>Passkey sign ins, last 30 days</td><td><strong><?php echo $logins30; ?></strong></td></tr>
-                        <tr><td>Failed attempts, last 30 days</td><td><strong><?php echo $fails30; ?></strong></td></tr>
-                        <tr><td>Clone warnings, last 30 days</td><td><strong><?php echo $clones30; ?></strong></td></tr>
-                        <tr><td>Nudge opt outs</td><td><strong><?php echo $optouts; ?></strong></td></tr>
+                        <tr><td><?php echo PKL_CON_ENROLLED; ?></td><td><strong><?php echo $enrolledCustomers; ?></strong></td></tr>
+                        <tr><td><?php echo PKL_CON_TOTAL_KEYS; ?></td><td><strong><?php echo $totalKeys; ?></strong></td></tr>
+                        <tr><td><?php echo PKL_CON_LOGINS_30; ?></td><td><strong><?php echo $logins30; ?></strong></td></tr>
+                        <tr><td><?php echo PKL_CON_FAILS_30; ?></td><td><strong><?php echo $fails30; ?></strong></td></tr>
+                        <tr><td><?php echo PKL_CON_CLONES_30; ?></td><td><strong><?php echo $clones30; ?></strong></td></tr>
+                        <tr><td><?php echo PKL_CON_OPTOUTS; ?></td><td><strong><?php echo $optouts; ?></strong></td></tr>
                     </table>
                     <?php
                     // Link straight to the plugin's configuration group by gID.
@@ -170,17 +170,17 @@ if (is_file($debugFile)) {
                     $pklSettingsGid = $db->Execute("SELECT configuration_group_id FROM " . TABLE_CONFIGURATION . " WHERE configuration_key = 'PKL_ENABLED' LIMIT 1");
                     if (!$pklSettingsGid->EOF) {
                     ?>
-                    <p style="margin-top:10px;"><a href="<?php echo zen_href_link(FILENAME_CONFIGURATION, 'gID=' . (int)$pklSettingsGid->fields['configuration_group_id']); ?>">Open settings</a></p>
+                    <p style="margin-top:10px;"><a href="<?php echo zen_href_link(FILENAME_CONFIGURATION, 'gID=' . (int)$pklSettingsGid->fields['configuration_group_id']); ?>"><?php echo PKL_CON_OPEN_SETTINGS; ?></a></p>
                     <?php } ?>
                 </div>
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading"><strong>Maintenance</strong></div>
+                <div class="panel-heading"><strong><?php echo PKL_CON_MAINTENANCE; ?></strong></div>
                 <div class="panel-body">
-                    <p style="margin-bottom:8px;">Removes passkey rows for deleted customers and for the shared guest checkout account, and prunes audit entries older than 90 days. Safe to run any time.</p>
+                    <p style="margin-bottom:8px;"><?php echo PKL_CON_SWEEP_TEXT; ?></p>
                     <?php echo zen_draw_form('pkl_sweep', FILENAME_PASSKEY_LOGIN_CONSOLE, 'action=sweep', 'post'); ?>
-                        <button type="submit" class="btn btn-default">Run Maintenance Sweep</button>
+                        <button type="submit" class="btn btn-default"><?php echo PKL_CON_SWEEP_BUTTON; ?></button>
                     </form>
                 </div>
             </div>
@@ -188,40 +188,40 @@ if (is_file($debugFile)) {
 
         <div class="col-md-6">
             <div class="panel panel-default">
-                <div class="panel-heading"><strong>Customer Lookup</strong></div>
+                <div class="panel-heading"><strong><?php echo PKL_CON_LOOKUP; ?></strong></div>
                 <div class="panel-body">
                     <?php echo zen_draw_form('pkl_lookup', FILENAME_PASSKEY_LOGIN_CONSOLE, '', 'get'); ?>
                         <div class="input-group" style="max-width:420px;">
-                            <input type="text" name="email" class="form-control" placeholder="customer email address" value="<?php echo htmlspecialchars($lookupEmail, ENT_QUOTES); ?>">
-                            <span class="input-group-btn"><button type="submit" class="btn btn-default">Look Up</button></span>
+                            <input type="text" name="email" class="form-control" placeholder="<?php echo htmlspecialchars(PKL_CON_LOOKUP_PLACEHOLDER, ENT_QUOTES); ?>" value="<?php echo htmlspecialchars($lookupEmail, ENT_QUOTES); ?>">
+                            <span class="input-group-btn"><button type="submit" class="btn btn-default"><?php echo PKL_CON_LOOKUP_BUTTON; ?></button></span>
                         </div>
                     </form>
                     <?php if ($lookupEmail !== '' && $lookupCustomer === null) { ?>
-                        <p style="margin-top:10px;">No customer found with that email address.</p>
+                        <p style="margin-top:10px;"><?php echo PKL_CON_LOOKUP_NONE; ?></p>
                     <?php } elseif ($lookupCustomer !== null) { ?>
                         <p style="margin-top:12px;"><strong><?php echo htmlspecialchars($lookupCustomer['customers_firstname'] . ' ' . $lookupCustomer['customers_lastname'], ENT_QUOTES); ?></strong>
                         (id <?php echo (int)$lookupCustomer['customers_id']; ?>)</p>
                         <?php if (count($lookupKeys) === 0) { ?>
-                            <p>This customer has no passkeys.</p>
+                            <p><?php echo PKL_CON_LOOKUP_NO_KEYS; ?></p>
                         <?php } else { ?>
                             <table class="table table-condensed">
-                                <tr><th>Label</th><th>Added</th><th>Last used</th><th></th></tr>
+                                <tr><th><?php echo PKL_CON_TH_LABEL; ?></th><th><?php echo PKL_CON_TH_ADDED; ?></th><th><?php echo PKL_CON_TH_LAST_USED; ?></th><th></th></tr>
                                 <?php foreach ($lookupKeys as $k) { ?>
                                 <tr>
                                     <td><?php echo htmlspecialchars($k['device_label'], ENT_QUOTES); ?><br><small><?php echo htmlspecialchars($k['transports'], ENT_QUOTES); ?></small></td>
                                     <td><?php echo htmlspecialchars((string)$k['date_added'], ENT_QUOTES); ?></td>
-                                    <td><?php echo htmlspecialchars((string)($k['last_used'] ?? 'never'), ENT_QUOTES); ?></td>
+                                    <td><?php echo htmlspecialchars((string)($k['last_used'] ?? PKL_CON_NEVER), ENT_QUOTES); ?></td>
                                     <td>
                                         <?php echo zen_draw_form('pkl_rm_' . (int)$k['passkey_id'], FILENAME_PASSKEY_LOGIN_CONSOLE, 'action=remove_key&email=' . urlencode($lookupEmail), 'post'); ?>
                                             <input type="hidden" name="passkey_id" value="<?php echo (int)$k['passkey_id']; ?>">
                                             <input type="hidden" name="customers_id" value="<?php echo (int)$lookupCustomer['customers_id']; ?>">
-                                            <button type="submit" class="btn btn-danger btn-xs" onclick="return window.confirm('Remove this passkey? The customer will need to sign in another way and re add it.');">Remove</button>
+                                            <button type="submit" class="btn btn-danger btn-xs" onclick="return window.confirm(<?php echo htmlspecialchars(json_encode(PKL_CON_REMOVE_CONFIRM), ENT_QUOTES); ?>);"><?php echo PKL_CON_REMOVE_BUTTON; ?></button>
                                         </form>
                                     </td>
                                 </tr>
                                 <?php } ?>
                             </table>
-                            <p><small>Use this when a customer reports a lost or stolen device. Removing the passkey here immediately blocks sign in with it.</small></p>
+                            <p><small><?php echo PKL_CON_LOST_DEVICE_NOTE; ?></small></p>
                         <?php } ?>
                     <?php } ?>
                 </div>
@@ -232,13 +232,13 @@ if (is_file($debugFile)) {
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-default">
-                <div class="panel-heading"><strong>Recent Activity</strong></div>
+                <div class="panel-heading"><strong><?php echo PKL_CON_RECENT; ?></strong></div>
                 <div class="panel-body" style="max-height:340px;overflow:auto;">
                     <?php if (count($recent) === 0) { ?>
-                        <p>No activity recorded yet.</p>
+                        <p><?php echo PKL_CON_RECENT_NONE; ?></p>
                     <?php } else { ?>
                         <table class="table table-condensed" style="margin-bottom:0;">
-                            <tr><th>When</th><th>Event</th><th>Customer</th><th>IP</th></tr>
+                            <tr><th><?php echo PKL_CON_TH_WHEN; ?></th><th><?php echo PKL_CON_TH_EVENT; ?></th><th><?php echo PKL_CON_TH_CUSTOMER; ?></th><th><?php echo PKL_CON_TH_IP; ?></th></tr>
                             <?php foreach ($recent as $a) { ?>
                             <tr>
                                 <td><?php echo htmlspecialchars((string)$a['date_added'], ENT_QUOTES); ?></td>
@@ -254,10 +254,10 @@ if (is_file($debugFile)) {
         </div>
         <div class="col-md-6">
             <div class="panel panel-default">
-                <div class="panel-heading"><strong>Debug Log Tail</strong> <small>(logs/passkey_login_debug.log)</small></div>
+                <div class="panel-heading"><strong><?php echo PKL_CON_DEBUG; ?></strong> <small>(logs/passkey_login_debug.log)</small></div>
                 <div class="panel-body" style="max-height:340px;overflow:auto;">
                     <?php if (count($debugTail) === 0) { ?>
-                        <p>No debug log entries. Enable Debug Logging in settings to record ceremony details while testing.</p>
+                        <p><?php echo PKL_CON_DEBUG_NONE; ?></p>
                     <?php } else { ?>
                         <pre style="font-size:11px;white-space:pre-wrap;margin:0;"><?php echo htmlspecialchars(implode("\n", $debugTail), ENT_QUOTES); ?></pre>
                     <?php } ?>

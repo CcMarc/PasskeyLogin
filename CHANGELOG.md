@@ -3,7 +3,7 @@
 File headers (`@version` / `@updated`) record the release that LAST MODIFIED
 each file, not the current release — same convention as Zen Cart core.
 
-## v1.0.1 (08-26-2026)
+## v1.0.1 (08-27-2026)
 
 - FIX: the admin console's Open Settings link used a configuration URL
   pattern core does not support (`action=locate`), which fell through
@@ -11,6 +11,11 @@ each file, not the current release — same convention as Zen Cart core.
   PHP warning about the missing `gID` parameter on PHP 8. The link now
   looks up the plugin's configuration group and links it directly with
   `gID`, the way core navigates.
+- I18N: the admin console previously had its English text hardcoded;
+  every string the console displays now comes from language constants in
+  the admin extra_definitions language file, so translations can be
+  added as additional language files without touching code. Reported
+  via the support thread.
 - DOCS: the README Compatibility section now covers customer devices
   and browsers: iOS 16+ / Android 9+ requirements, the Bluetooth
   requirement of the QR cross device sign in flow, older phones (such

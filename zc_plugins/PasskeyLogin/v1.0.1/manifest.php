@@ -6,13 +6,13 @@
  * @author      Marcopolo
  * @copyright   2026
  * @license     GNU General Public License (GPL) - https://www.zen-cart.com/license/2_0.txt
- * @version     1.0.0
- * @updated     08-23-2026
+ * @version     1.0.1
+ * @updated     08-27-2026
  * @github      https://github.com/CcMarc/PasskeyLogin
  */
 return [
     'pluginVersion'     => 'v1.0.1',
-    'pluginHotfixLevel' => 0,
+    'pluginHotfixLevel' => 1,
     'pluginName'        => 'Passkey Login',
     'pluginDescription' => 'Lets customers sign in with a passkey (Face ID, fingerprint, Windows Hello, or a security key) instead of typing a password. Uses the WebAuthn standard. Passkeys appear in the browser autofill on the login page, so no extra buttons are added for customers who do not use them.',
     'pluginAuthor'      => 'Marcopolo',
