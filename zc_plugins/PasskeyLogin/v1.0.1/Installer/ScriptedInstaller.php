@@ -342,6 +342,8 @@ class ScriptedInstaller extends ScriptedInstallBase
              $cat . 'includes/languages/english/lang.passkey_settings.php'],
             [$src . '/includes/languages/japanese/lang.passkey_settings.php',
              $cat . 'includes/languages/japanese/lang.passkey_settings.php'],
+            [$src . '/includes/languages/french/lang.passkey_settings.php',
+             $cat . 'includes/languages/french/lang.passkey_settings.php'],
             [$src . '/includes/templates/TEMPLATE_DIR/templates/tpl_passkey_settings_default.php',
              $cat . 'includes/templates/' . $tpl . '/templates/tpl_passkey_settings_default.php'],
         ];
