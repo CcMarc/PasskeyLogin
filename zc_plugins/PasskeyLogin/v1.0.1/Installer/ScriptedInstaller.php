@@ -24,7 +24,7 @@
 // Everything that stamps a version (PKL_VERSION config value) reads this
 // constant, never a literal.
 if (!defined('PASSKEYLOGIN_CURRENT_VERSION')) define('PASSKEYLOGIN_CURRENT_VERSION', '1.0.1');
-if (!defined('PASSKEYLOGIN_HOTFIX_LEVEL')) define('PASSKEYLOGIN_HOTFIX_LEVEL', 3);
+if (!defined('PASSKEYLOGIN_HOTFIX_LEVEL')) define('PASSKEYLOGIN_HOTFIX_LEVEL', 4);
 
 use Zencart\PluginSupport\ScriptedInstaller as ScriptedInstallBase;
 

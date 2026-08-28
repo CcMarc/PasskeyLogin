@@ -1,11 +1,16 @@
 <?php
 /**
- * @copyright Copyright 2003-2026 Zen Cart Development Team
- * @copyright Portions Copyright 2003 osCommerce
- * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: piloujp 2026 Aug 27 Modified in v2.2.2 $
-*/
-
+ * Module: PasskeyLogin
+ *
+ * @requires    Zen Cart 2.1.0 or later, PHP 8.0+ with OpenSSL
+ * @author      Marcopolo
+ * @contributor piloujp
+ * @copyright   2026
+ * @license     GNU General Public License (GPL) - https://www.zen-cart.com/license/2_0.txt
+ * @version     1.0.1
+ * @updated     08-28-2026
+ * @github      https://github.com/CcMarc/PasskeyLogin
+ */
 $define = [
     'ADMIN_PLUGIN_MANAGER_NAME_FOR_PASSKEYLOGIN' => 'Connexion par clé d’accès',
     'ADMIN_PLUGIN_MANAGER_DESCRIPTION_FOR_PASSKEYLOGIN' => 'Permet aux clients de se connecter à l’aide d’une clé d’accès (Face ID, empreinte digitale, Windows Hello ou clé de sécurité) plutôt que de saisir un mot de passe. Utilise la norme WebAuthn. Les clés d’accès apparaissent dans la fonction de remplissage automatique du navigateur sur la page de connexion ; aucun bouton supplémentaire n’est donc ajouté pour les clients qui ne les utilisent pas.',

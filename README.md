@@ -182,7 +182,8 @@ the login page shows them nothing new.
 All customer facing text lives in the catalog language files and all
 admin console text lives in
 `zc_plugins/PasskeyLogin/v1.0.1/admin/includes/languages/english/extra_definitions/lang.passkey_login_admin.php`.
-The English files are the canonical key list.
+The English files are the canonical key list. Currently included:
+English, French, Japanese.
 
 To translate the admin console, copy that file to the matching
 directory for your language (for example
@@ -193,7 +194,12 @@ sprintf templates with the markup and punctuation inside the value, so
 word order and punctuation are fully yours.
 
 Contributed language files are welcome; open a pull request or attach
-them to the support thread and they will ship with the plugin, credited.
+them to the support thread and they will ship with the plugin, credited
+here and in the files themselves.
+
+## Contributors
+
+- piloujp: French and Japanese translations
 
 ## Support
 

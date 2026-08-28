@@ -4,10 +4,11 @@
  *
  * @requires    Zen Cart 2.1.0 or later, PHP 8.0+ with OpenSSL
  * @author      Marcopolo
+ * @contributor piloujp
  * @copyright   2026
  * @license     GNU General Public License (GPL) - https://www.zen-cart.com/license/2_0.txt
  * @version     1.0.1
- * @updated     08-27-2026
+ * @updated     08-28-2026
  * @github      https://github.com/CcMarc/PasskeyLogin
  */
 // Admin language constants, array format for the 2.x plugin language

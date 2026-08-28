@@ -1,11 +1,16 @@
 <?php
 /**
- * @copyright Copyright 2003-2026 Zen Cart Development Team
- * @copyright Portions Copyright 2003 osCommerce
- * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: piloujp 2026 Aug 27 Modified in v2.2.2 $
-*/
-
+ * Module: PasskeyLogin
+ *
+ * @requires    Zen Cart 2.1.0 or later, PHP 8.0+ with OpenSSL
+ * @author      Marcopolo
+ * @contributor piloujp
+ * @copyright   2026
+ * @license     GNU General Public License (GPL) - https://www.zen-cart.com/license/2_0.txt
+ * @version     1.0.1
+ * @updated     08-28-2026
+ * @github      https://github.com/CcMarc/PasskeyLogin
+ */
 $define = [
     'ADMIN_PLUGIN_MANAGER_NAME_FOR_PASSKEYLOGIN' => 'パスキーログイン',
     'ADMIN_PLUGIN_MANAGER_DESCRIPTION_FOR_PASSKEYLOGIN' => 'パスワードを入力する代わりに、パスキー（Face ID、指紋認証、Windows Hello、またはセキュリティキー）を使用してサインインできるようにします。WebAuthn標準を採用しています。パスキーはログインページのブラウザの自動入力機能に表示されるため、パスキーを使用しない顧客に対して余分なボタンが追加されることはありません。',

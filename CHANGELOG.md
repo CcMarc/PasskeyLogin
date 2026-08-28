@@ -11,6 +11,10 @@ each file, not the current release — same convention as Zen Cart core.
   PHP warning about the missing `gID` parameter on PHP 8. The link now
   looks up the plugin's configuration group and links it directly with
   `gID`, the way core navigates.
+- MAINT: contributed language file headers normalized to the project
+  header format with correct version and date stamps, with the
+  contributor noted in each file; README gains a Contributors section
+  and lists the included languages.
 - I18N: French and Japanese language files added for the admin console,
   configuration labels, catalog, and the passkey settings page.
 - I18N: the console's status sentence and the customer lookup id are
