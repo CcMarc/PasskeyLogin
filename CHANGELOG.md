@@ -3,6 +3,15 @@
 File headers (`@version` / `@updated`) record the release that LAST MODIFIED
 each file, not the current release — same convention as Zen Cart core.
 
+## v1.0.2 (10-06-2026)
+
+- Added a generic `NOTIFY_PASSKEY_LOGIN_RESULT` notifier for passkey authentication outcomes. Observers can subscribe to success and failure events without modifying the plugin or adding dependencies on other modules.
+- Reports options-stage failures and verification-stage successes/failures with stable reason codes and a customer ID when known. Successful generation of passkey options is **not** a successful login.
+- The hook passes no passwords, challenges, credentials, signatures, security tokens, or session cookies; existing authentication checks and browser responses are unchanged.
+- After a passkey sign-in, the customer returns to the page that sent them to login only when it is a regular storefront page. Sign-in pages, popups, quick views and AJAX endpoints are skipped, and the fallback is now the store home page instead of My Account.
+- Added direct-access guards to every plugin file that loads only through Zen Cart, including the admin files, installer, published page files and language files.
+- The Zen Cart plugin library ID changed from 2252 to 2450, and `pluginId` in `manifest.php` now matches. Copies installed before October 6, 2026 carry the old ID and will not show update notices in Plugin Manager until the current release is downloaded and its files replace the installed ones.
+
 ## v1.0.1 (08-27-2026)
 
 - FIX: the admin console's Open Settings link used a configuration URL
