@@ -6,8 +6,8 @@
  * @author      Marcopolo
  * @copyright   2026
  * @license     GNU General Public License (GPL) - https://www.zen-cart.com/license/2_0.txt
- * @version     1.0.2
- * @updated     10-06-2026
+ * @version     1.0.3
+ * @updated     10-11-2026
  * @github      https://github.com/CcMarc/PasskeyLogin
  */
 // Injects the conditional UI passkey script on the login page and the
@@ -33,7 +33,24 @@ class zcObserverPasskeyLogin extends base
 {
     public function __construct()
     {
-        $this->attach($this, ['NOTIFY_FOOTER_END']);
+        $this->attach($this, ['NOTIFY_FOOTER_END', 'NOTIFY_HEADER_START_PASSKEY_SETTINGS']);
+    }
+
+    // The JSON calls that the login page (passkey sign-in) and the account page
+    // (the nudge's dismiss link) send to passkey_settings are never a page to go
+    // back to. Zen Cart records every request in its navigation history, so
+    // without this, zen_back_link() (for example the shopping cart's Continue
+    // Shopping link) pointed at the Passkeys page instead of the page the
+    // customer was on. Same call as core's own popup pages. The Passkeys page's
+    // own calls (ajax_reg_*) keep their entry, which is that page. Fired at the
+    // top of the page controller, before any JSON answer.
+    public function updateNotifyHeaderStartPasskeySettings(&$class, $eventID)
+    {
+        $action = (isset($_GET['action']) && is_string($_GET['action'])) ? $_GET['action'] : '';
+        if (in_array($action, ['ajax_login_options', 'ajax_login_verify', 'ajax_nudge_optout'], true)
+            && isset($_SESSION['navigation']) && is_object($_SESSION['navigation'])) {
+            $_SESSION['navigation']->remove_current_page();
+        }
     }
 
     public function updateNotifyFooterEnd(&$class, $eventID)

@@ -3,6 +3,10 @@
 File headers (`@version` / `@updated`) record the release that LAST MODIFIED
 each file, not the current release — same convention as Zen Cart core.
 
+## v1.0.3 (10-11-2026)
+
+- Fixed the shopping cart's Continue Shopping link (and any other `zen_back_link()`) pointing at the Passkeys page after a visit to the login page. The background passkey requests sent by the login page (sign in options and verification) and by the account page's invitation banner (dismiss) are now removed from Zen Cart's navigation history, the same way core handles its popup pages, so the back link returns to the page the customer was actually on. Requests made from the Passkeys page itself are unchanged.
+
 ## v1.0.2 (10-06-2026)
 
 - Added a generic `NOTIFY_PASSKEY_LOGIN_RESULT` notifier for passkey authentication outcomes. Observers can subscribe to success and failure events without modifying the plugin or adding dependencies on other modules.

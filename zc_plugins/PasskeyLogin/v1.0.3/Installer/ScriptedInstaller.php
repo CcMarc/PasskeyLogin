@@ -6,8 +6,8 @@
  * @author      Marcopolo
  * @copyright   2026
  * @license     GNU General Public License (GPL) - https://www.zen-cart.com/license/2_0.txt
- * @version     1.0.2
- * @updated     10-06-2026
+ * @version     1.0.3
+ * @updated     10-11-2026
  * @github      https://github.com/CcMarc/PasskeyLogin
  */
 // Install and upgrade run the same unconditional idempotent helpers (no
@@ -27,7 +27,7 @@ if (!defined('IS_ADMIN_FLAG')) {
 // The ONLY version literals in this plugin live here and in the manifest.
 // Everything that stamps a version (PKL_VERSION config value) reads this
 // constant, never a literal.
-if (!defined('PASSKEYLOGIN_CURRENT_VERSION')) define('PASSKEYLOGIN_CURRENT_VERSION', '1.0.2');
+if (!defined('PASSKEYLOGIN_CURRENT_VERSION')) define('PASSKEYLOGIN_CURRENT_VERSION', '1.0.3');
 if (!defined('PASSKEYLOGIN_HOTFIX_LEVEL')) define('PASSKEYLOGIN_HOTFIX_LEVEL', 0);
 
 use Zencart\PluginSupport\ScriptedInstaller as ScriptedInstallBase;
