@@ -30,6 +30,10 @@ an attacker to steal from the store database except a public key.
   removal (for lost or stolen devices), recent activity, a debug log tail,
   and a maintenance sweep. Settings live in Configuration > Passkey Login.
 
+![The Passkeys page in My Account](images/passkeys-page.png)
+
+![The admin console](images/console.png)
+
 ## Requirements
 
 - Zen Cart 2.1.0 or later (developed and tested on 2.2.2 — see
